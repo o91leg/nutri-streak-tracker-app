@@ -1,13 +1,12 @@
 
 import React, { useState } from 'react';
-import { format, addDays, subDays, startOfDay, addWeeks, subWeeks, startOfWeek, endOfWeek, eachDayOfInterval } from 'date-fns';
+import { format, addDays, subDays, startOfDay } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const Calendar = () => {
   const [selectedDate, setSelectedDate] = useState(startOfDay(new Date()));
-  const [currentWeek, setCurrentWeek] = useState(startOfWeek(new Date(), { locale: ru }));
 
   // Mock data generator
   const generateMockDataForDate = (date: Date) => {
@@ -37,59 +36,23 @@ const Calendar = () => {
 
   const currentDayData = generateMockDataForDate(selectedDate);
 
-  // Week navigation
-  const goToPreviousWeek = () => {
-    const newWeek = subWeeks(currentWeek, 1);
-    setCurrentWeek(newWeek);
-    setSelectedDate(newWeek);
-  };
-
-  const goToNextWeek = () => {
-    const newWeek = addWeeks(currentWeek, 1);
-    setCurrentWeek(newWeek);
-    setSelectedDate(newWeek);
-  };
-
-  const goToCurrentWeek = () => {
-    const thisWeek = startOfWeek(new Date(), { locale: ru });
-    setCurrentWeek(thisWeek);
-    setSelectedDate(startOfDay(new Date()));
-  };
-
   // Day navigation
   const goToPreviousDay = () => {
     const newDate = subDays(selectedDate, 1);
     setSelectedDate(newDate);
-    // Update week if necessary
-    if (newDate < currentWeek) {
-      setCurrentWeek(startOfWeek(newDate, { locale: ru }));
-    }
   };
 
   const goToNextDay = () => {
     const newDate = addDays(selectedDate, 1);
     setSelectedDate(newDate);
-    // Update week if necessary
-    const weekEnd = endOfWeek(currentWeek, { locale: ru });
-    if (newDate > weekEnd) {
-      setCurrentWeek(startOfWeek(newDate, { locale: ru }));
-    }
   };
 
   const goToToday = () => {
     const today = startOfDay(new Date());
     setSelectedDate(today);
-    setCurrentWeek(startOfWeek(today, { locale: ru }));
   };
 
-  // Get week days
-  const weekDays = eachDayOfInterval({
-    start: currentWeek,
-    end: endOfWeek(currentWeek, { locale: ru })
-  });
-
   const isToday = format(selectedDate, 'yyyy-MM-dd') === format(new Date(), 'yyyy-MM-dd');
-  const isCurrentWeek = format(currentWeek, 'yyyy-MM-dd') === format(startOfWeek(new Date(), { locale: ru }), 'yyyy-MM-dd');
 
   return (
     <div className="min-h-screen bg-background p-4">
@@ -97,78 +60,6 @@ const Calendar = () => {
         <h1 className="text-2xl font-bold text-center text-foreground pt-4">
           Календарь питания
         </h1>
-
-        {/* Week Navigation */}
-        <div className="bg-card rounded-lg p-4 border border-border">
-          <div className="flex items-center justify-between mb-4">
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={goToPreviousWeek}
-              className="h-8 w-8"
-            >
-              <ChevronLeft className="h-4 w-4" />
-            </Button>
-            
-            <div className="text-center">
-              <div className="text-lg font-semibold text-foreground">
-                {format(currentWeek, 'dd', { locale: ru })} - {format(endOfWeek(currentWeek, { locale: ru }), 'dd MMMM', { locale: ru })}
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Неделя
-              </div>
-            </div>
-            
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={goToNextWeek}
-              className="h-8 w-8"
-            >
-              <ChevronRight className="h-4 w-4" />
-            </Button>
-          </div>
-
-          {/* Horizontal Day Selector */}
-          <div className="flex gap-2 overflow-x-auto pb-2">
-            {weekDays.map((day) => {
-              const isSelected = format(day, 'yyyy-MM-dd') === format(selectedDate, 'yyyy-MM-dd');
-              const isDayToday = format(day, 'yyyy-MM-dd') === format(new Date(), 'yyyy-MM-dd');
-              
-              return (
-                <button
-                  key={day.toISOString()}
-                  onClick={() => setSelectedDate(day)}
-                  className={`flex flex-col items-center p-2 rounded-lg min-w-16 transition-colors ${
-                    isSelected 
-                      ? 'bg-primary text-primary-foreground' 
-                      : isDayToday
-                        ? 'bg-primary/20 text-primary'
-                        : 'bg-muted/50 text-muted-foreground hover:bg-muted'
-                  }`}
-                >
-                  <span className="text-xs">
-                    {format(day, 'EEE', { locale: ru })}
-                  </span>
-                  <span className="text-sm font-medium">
-                    {format(day, 'dd')}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-
-          {!isCurrentWeek && (
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={goToCurrentWeek}
-              className="w-full mt-2"
-            >
-              Текущая неделя
-            </Button>
-          )}
-        </div>
 
         {/* Selected Day Navigation */}
         <div className="bg-card rounded-lg p-4 border border-border">
