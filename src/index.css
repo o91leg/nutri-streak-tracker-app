@@ -1,94 +1,96 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. */
+/* Apple-style design system */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 242 242 247; /* iOS light gray background #F2F2F7 */
+    --foreground: 28 28 30; /* iOS dark text #1C1C1E */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 255 255 255; /* Pure white cards */
+    --card-foreground: 28 28 30;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 255 255 255;
+    --popover-foreground: 28 28 30;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 0 122 255; /* SF Blue #007AFF */
+    --primary-foreground: 255 255 255;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 242 242 247;
+    --secondary-foreground: 60 60 67;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 242 242 247;
+    --muted-foreground: 142 142 147; /* iOS secondary label */
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 242 242 247;
+    --accent-foreground: 28 28 30;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 255 59 48; /* SF Red #FF3B30 */
+    --destructive-foreground: 255 255 255;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 199 199 204; /* iOS separator #C7C7CC */
+    --input: 242 242 247;
+    --ring: 0 122 255;
 
-    --radius: 0.5rem;
+    --radius: 12px; /* iOS corner radius */
 
-    --sidebar-background: 0 0% 98%;
+    --sidebar-background: 255 255 255;
+    --sidebar-foreground: 28 28 30;
+    --sidebar-primary: 0 122 255;
+    --sidebar-primary-foreground: 255 255 255;
+    --sidebar-accent: 242 242 247;
+    --sidebar-accent-foreground: 28 28 30;
+    --sidebar-border: 199 199 204;
+    --sidebar-ring: 0 122 255;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Apple-specific colors */
+    --sf-green: 52 199 89; /* #34C759 */
+    --sf-orange: 255 149 0; /* #FF9500 */
+    --sf-red: 255 59 48; /* #FF3B30 */
+    --sf-purple: 175 82 222; /* #AF52DE */
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 0 0 0; /* Pure black for dark mode */
+    --foreground: 255 255 255;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 28 28 30; /* iOS dark card */
+    --card-foreground: 255 255 255;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 28 28 30;
+    --popover-foreground: 255 255 255;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 10 132 255; /* Lighter blue for dark mode */
+    --primary-foreground: 255 255 255;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 28 28 30;
+    --secondary-foreground: 235 235 245;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 28 28 30;
+    --muted-foreground: 152 152 157;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 28 28 30;
+    --accent-foreground: 255 255 255;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 255 69 58;
+    --destructive-foreground: 255 255 255;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 56 56 60;
+    --input: 28 28 30;
+    --ring: 10 132 255;
+
+    --sidebar-background: 0 0 0;
+    --sidebar-foreground: 255 255 255;
+    --sidebar-primary: 10 132 255;
+    --sidebar-primary-foreground: 255 255 255;
+    --sidebar-accent: 28 28 30;
+    --sidebar-accent-foreground: 255 255 255;
+    --sidebar-border: 56 56 60;
+    --sidebar-ring: 10 132 255;
   }
 }
 
@@ -98,6 +100,36 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-inter;
+  }
+}
+
+/* Apple-style animations */
+@layer utilities {
+  .apple-spring {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  
+  .apple-smooth {
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  .apple-card {
+    @apply bg-card rounded-xl shadow-sm border-0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  }
+  
+  .apple-card-hover {
+    @apply apple-card apple-smooth hover:shadow-md hover:scale-[1.02];
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+  
+  .apple-button {
+    @apply apple-smooth active:scale-95;
+  }
+  
+  .glass-effect {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
   }
 }

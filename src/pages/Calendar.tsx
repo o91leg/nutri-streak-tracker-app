@@ -57,27 +57,27 @@ const Calendar = () => {
   return (
     <div className="min-h-screen bg-background p-4">
       <div className="max-w-md mx-auto space-y-6">
-        <h1 className="text-2xl font-bold text-center text-foreground pt-4">
+        <h1 className="text-3xl font-bold text-center text-foreground pt-6 font-inter">
           Календарь питания
         </h1>
 
         {/* Selected Day Navigation */}
-        <div className="bg-card rounded-lg p-4 border border-border">
+        <div className="apple-card-hover p-6">
           <div className="flex items-center justify-between mb-4">
             <Button
               variant="outline"
               size="icon"
               onClick={goToPreviousDay}
-              className="h-8 w-8"
+              className="h-10 w-10 apple-button rounded-full border-0 bg-muted/50 hover:bg-muted"
             >
-              <ChevronLeft className="h-4 w-4" />
+              <ChevronLeft className="h-5 w-5" />
             </Button>
             
             <div className="text-center">
-              <div className="text-lg font-semibold text-foreground">
+              <div className="text-2xl font-semibold text-foreground font-inter">
                 {format(selectedDate, 'dd MMMM', { locale: ru })}
               </div>
-              <div className="text-sm text-muted-foreground">
+              <div className="text-base text-muted-foreground font-medium">
                 {format(selectedDate, 'EEEE', { locale: ru })}
               </div>
             </div>
@@ -86,9 +86,9 @@ const Calendar = () => {
               variant="outline"
               size="icon"
               onClick={goToNextDay}
-              className="h-8 w-8"
+              className="h-10 w-10 apple-button rounded-full border-0 bg-muted/50 hover:bg-muted"
             >
-              <ChevronRight className="h-4 w-4" />
+              <ChevronRight className="h-5 w-5" />
             </Button>
           </div>
 
@@ -97,7 +97,7 @@ const Calendar = () => {
               variant="outline"
               size="sm"
               onClick={goToToday}
-              className="w-full"
+              className="w-full apple-button rounded-xl border-0 bg-primary text-primary-foreground hover:bg-primary/90 font-medium"
             >
               Сегодня
             </Button>
@@ -105,47 +105,61 @@ const Calendar = () => {
         </div>
 
         {/* Daily Nutrition Summary */}
-        <div className="bg-card rounded-lg p-4 border border-border">
-          <h2 className="text-lg font-semibold text-foreground mb-4">
+        <div className="apple-card-hover p-6">
+          <h2 className="text-xl font-semibold text-foreground mb-6 font-inter">
             Питание на {format(selectedDate, 'dd.MM', { locale: ru })}
           </h2>
           
-          <div className="grid grid-cols-2 gap-4 text-sm">
-            <div className="flex justify-between items-center p-3 bg-muted/50 rounded-lg">
-              <span className="text-muted-foreground">Калории:</span>
-              <span className="text-foreground font-medium">{currentDayData.calories} ккал</span>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="apple-card p-4 bg-gradient-to-br from-primary/10 to-primary/5">
+              <div className="flex flex-col items-center text-center">
+                <span className="text-sm text-muted-foreground font-medium mb-1">Калории</span>
+                <span className="text-2xl font-bold text-primary">{currentDayData.calories}</span>
+                <span className="text-xs text-muted-foreground">ккал</span>
+              </div>
             </div>
-            <div className="flex justify-between items-center p-3 bg-muted/50 rounded-lg">
-              <span className="text-muted-foreground">Белки:</span>
-              <span className="text-foreground font-medium">{currentDayData.proteins} г</span>
+            <div className="apple-card p-4 bg-gradient-to-br from-sf-green/10 to-sf-green/5">
+              <div className="flex flex-col items-center text-center">
+                <span className="text-sm text-muted-foreground font-medium mb-1">Белки</span>
+                <span className="text-2xl font-bold text-sf-green">{currentDayData.proteins}</span>
+                <span className="text-xs text-muted-foreground">г</span>
+              </div>
             </div>
-            <div className="flex justify-between items-center p-3 bg-muted/50 rounded-lg">
-              <span className="text-muted-foreground">Жиры:</span>
-              <span className="text-foreground font-medium">{currentDayData.fats} г</span>
+            <div className="apple-card p-4 bg-gradient-to-br from-sf-orange/10 to-sf-orange/5">
+              <div className="flex flex-col items-center text-center">
+                <span className="text-sm text-muted-foreground font-medium mb-1">Жиры</span>
+                <span className="text-2xl font-bold text-sf-orange">{currentDayData.fats}</span>
+                <span className="text-xs text-muted-foreground">г</span>
+              </div>
             </div>
-            <div className="flex justify-between items-center p-3 bg-muted/50 rounded-lg">
-              <span className="text-muted-foreground">Углеводы:</span>
-              <span className="text-foreground font-medium">{currentDayData.carbohydrates} г</span>
+            <div className="apple-card p-4 bg-gradient-to-br from-sf-purple/10 to-sf-purple/5">
+              <div className="flex flex-col items-center text-center">
+                <span className="text-sm text-muted-foreground font-medium mb-1">Углеводы</span>
+                <span className="text-2xl font-bold text-sf-purple">{currentDayData.carbohydrates}</span>
+                <span className="text-xs text-muted-foreground">г</span>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Consumed Dishes */}
         <div className="space-y-4">
-          <h2 className="text-lg font-semibold text-foreground">
+          <h2 className="text-xl font-semibold text-foreground font-inter">
             Съедено {isToday ? 'сегодня' : format(selectedDate, 'dd.MM')}
           </h2>
-          <div className="space-y-2">
+          <div className="space-y-3">
             {mockDishes.map((dish, index) => (
-              <div key={index} className="bg-card rounded-lg p-3 border border-border flex justify-between items-center">
-                <span className="text-foreground">{dish.dish_name}</span>
-                <span className="text-sm text-muted-foreground">{dish.calories} ккал</span>
+              <div key={index} className="apple-card-hover p-4 flex justify-between items-center">
+                <span className="text-foreground font-medium">{dish.dish_name}</span>
+                <div className="apple-card px-3 py-1 bg-muted/50">
+                  <span className="text-sm font-semibold text-foreground">{dish.calories} ккал</span>
+                </div>
               </div>
             ))}
             
             {mockDishes.length === 0 && (
-              <div className="text-center text-muted-foreground py-8">
-                На этот день данных нет
+              <div className="text-center text-muted-foreground py-12">
+                <div className="text-lg font-medium">На этот день данных нет</div>
               </div>
             )}
           </div>
