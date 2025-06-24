@@ -9,6 +9,7 @@ import {
   Title,
   Tooltip,
   Legend,
+  Filler,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { subWeeks, addWeeks, startOfWeek, endOfWeek, eachDayOfInterval, format } from 'date-fns';
@@ -23,7 +24,8 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  Filler
 );
 
 const Statistics = () => {
@@ -78,8 +80,9 @@ const Statistics = () => {
         backgroundColor: 'rgba(0, 0, 0, 0.8)',
         titleColor: '#ffffff',
         bodyColor: '#ffffff',
-        cornerRadius: 8,
+        cornerRadius: 12,
         displayColors: false,
+        padding: 12,
       },
     },
     scales: {
@@ -92,7 +95,7 @@ const Statistics = () => {
           font: {
             family: 'Inter',
             size: 12,
-            weight: '500',
+            weight: 'normal' as const,
           },
         },
       },
@@ -106,7 +109,7 @@ const Statistics = () => {
           font: {
             family: 'Inter',
             size: 12,
-            weight: '500',
+            weight: 'normal' as const,
           },
         },
       },
@@ -115,9 +118,11 @@ const Statistics = () => {
       point: {
         radius: 4,
         hoverRadius: 6,
+        borderWidth: 2,
       },
       line: {
         tension: 0.4,
+        borderWidth: 3,
       },
     },
   };
@@ -129,12 +134,13 @@ const Statistics = () => {
         label,
         data,
         borderColor: color,
-        backgroundColor: `${color}15`,
+        backgroundColor: `${color}20`,
         borderWidth: 3,
-        fill: true,
+        fill: 'origin' as const,
         pointBackgroundColor: color,
         pointBorderColor: '#ffffff',
         pointBorderWidth: 2,
+        tension: 0.4,
       },
     ],
   });
@@ -149,13 +155,13 @@ const Statistics = () => {
         </h1>
 
         {/* Week Navigation */}
-        <div className="apple-card-hover p-6">
+        <div className="apple-card p-6">
           <div className="flex items-center justify-between mb-4">
             <Button
               variant="outline"
               size="icon"
               onClick={goToPreviousWeek}
-              className="h-10 w-10 apple-button rounded-full border-0 bg-muted/50 hover:bg-muted"
+              className="h-10 w-10 apple-button rounded-full border-0 bg-muted/30 hover:bg-muted/50 active:scale-95"
             >
               <ChevronLeft className="h-5 w-5" />
             </Button>
@@ -173,7 +179,7 @@ const Statistics = () => {
               variant="outline"
               size="icon"
               onClick={goToNextWeek}
-              className="h-10 w-10 apple-button rounded-full border-0 bg-muted/50 hover:bg-muted"
+              className="h-10 w-10 apple-button rounded-full border-0 bg-muted/30 hover:bg-muted/50 active:scale-95"
             >
               <ChevronRight className="h-5 w-5" />
             </Button>
@@ -184,7 +190,7 @@ const Statistics = () => {
               variant="outline"
               size="sm"
               onClick={goToCurrentWeek}
-              className="w-full apple-button rounded-xl border-0 bg-primary text-primary-foreground hover:bg-primary/90 font-medium"
+              className="w-full apple-button rounded-xl border-0 bg-primary text-primary-foreground hover:bg-primary/90 font-medium active:scale-95"
             >
               Текущая неделя
             </Button>
@@ -192,28 +198,28 @@ const Statistics = () => {
         </div>
 
         <div className="space-y-6">
-          <div className="apple-card-hover p-6">
+          <div className="apple-card p-6">
             <h3 className="text-lg font-semibold text-foreground mb-4 font-inter">Калории</h3>
             <div className="h-48">
               <Line data={createChartData(caloriesData, '#007AFF', 'Калории')} options={chartOptions} />
             </div>
           </div>
 
-          <div className="apple-card-hover p-6">
+          <div className="apple-card p-6">
             <h3 className="text-lg font-semibold text-foreground mb-4 font-inter">Белки</h3>
             <div className="h-48">
               <Line data={createChartData(proteinsData, '#34C759', 'Белки')} options={chartOptions} />
             </div>
           </div>
 
-          <div className="apple-card-hover p-6">
+          <div className="apple-card p-6">
             <h3 className="text-lg font-semibold text-foreground mb-4 font-inter">Жиры</h3>
             <div className="h-48">
               <Line data={createChartData(fatsData, '#FF9500', 'Жиры')} options={chartOptions} />
             </div>
           </div>
 
-          <div className="apple-card-hover p-6">
+          <div className="apple-card p-6">
             <h3 className="text-lg font-semibold text-foreground mb-4 font-inter">Углеводы</h3>
             <div className="h-48">
               <Line data={createChartData(carbsData, '#AF52DE', 'Углеводы')} options={chartOptions} />
