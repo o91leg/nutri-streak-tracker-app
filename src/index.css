@@ -24,7 +24,7 @@
     --secondary-foreground: 60 60 67;
 
     --muted: 242 242 247;
-    --muted-foreground: 99 99 102; /* Better contrast for secondary text #636366 */
+    --muted-foreground: 60 60 67; /* Darker for better readability */
 
     --accent: 242 242 247;
     --accent-foreground: 17 17 17;
@@ -135,12 +135,12 @@
     -webkit-backdrop-filter: blur(20px);
   }
 
-  /* Text contrast improvements */
+  /* Better text contrast */
   .text-high-contrast {
-    color: hsl(var(--foreground));
+    @apply text-foreground;
   }
   
   .text-medium-contrast {
-    color: hsl(var(--muted-foreground));
+    @apply text-muted-foreground;
   }
 }
