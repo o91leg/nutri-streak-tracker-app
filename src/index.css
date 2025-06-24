@@ -8,43 +8,43 @@
 
 @layer base {
   :root {
-    --background: 242 242 247; /* iOS light gray background #F2F2F7 */
-    --foreground: 28 28 30; /* iOS dark text #1C1C1E */
+    --background: 248 248 248; /* Lighter gray for better contrast #F8F8F8 */
+    --foreground: 17 17 17; /* Darker text for better readability #111111 */
 
     --card: 255 255 255; /* Pure white cards */
-    --card-foreground: 28 28 30;
+    --card-foreground: 17 17 17; /* Dark text on cards */
 
     --popover: 255 255 255;
-    --popover-foreground: 28 28 30;
+    --popover-foreground: 17 17 17;
 
     --primary: 0 122 255; /* SF Blue #007AFF */
     --primary-foreground: 255 255 255;
 
-    --secondary: 242 242 247;
+    --secondary: 248 248 248;
     --secondary-foreground: 60 60 67;
 
     --muted: 242 242 247;
-    --muted-foreground: 142 142 147; /* iOS secondary label */
+    --muted-foreground: 99 99 102; /* Better contrast for secondary text #636366 */
 
     --accent: 242 242 247;
-    --accent-foreground: 28 28 30;
+    --accent-foreground: 17 17 17;
 
     --destructive: 255 59 48; /* SF Red #FF3B30 */
     --destructive-foreground: 255 255 255;
 
-    --border: 199 199 204; /* iOS separator #C7C7CC */
-    --input: 242 242 247;
+    --border: 209 209 214; /* Slightly darker border for visibility #D1D1D6 */
+    --input: 248 248 248;
     --ring: 0 122 255;
 
     --radius: 12px; /* iOS corner radius */
 
     --sidebar-background: 255 255 255;
-    --sidebar-foreground: 28 28 30;
+    --sidebar-foreground: 17 17 17;
     --sidebar-primary: 0 122 255;
     --sidebar-primary-foreground: 255 255 255;
     --sidebar-accent: 242 242 247;
-    --sidebar-accent-foreground: 28 28 30;
-    --sidebar-border: 199 199 204;
+    --sidebar-accent-foreground: 17 17 17;
+    --sidebar-border: 209 209 214;
     --sidebar-ring: 0 122 255;
 
     /* Apple-specific colors */
@@ -71,7 +71,7 @@
     --secondary-foreground: 235 235 245;
 
     --muted: 28 28 30;
-    --muted-foreground: 152 152 157;
+    --muted-foreground: 174 174 178; /* Better contrast in dark mode */
 
     --accent: 28 28 30;
     --accent-foreground: 255 255 255;
@@ -101,6 +101,8 @@
 
   body {
     @apply bg-background text-foreground font-inter;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
@@ -116,12 +118,12 @@
   
   .apple-card {
     @apply bg-card rounded-xl shadow-sm border-0;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
   }
   
   .apple-card-hover {
-    @apply apple-card apple-smooth hover:shadow-md hover:scale-[1.02];
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    @apply apple-card apple-smooth hover:shadow-lg hover:scale-[1.02];
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.08);
   }
   
   .apple-button {
@@ -131,5 +133,14 @@
   .glass-effect {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+  }
+
+  /* Text contrast improvements */
+  .text-high-contrast {
+    color: hsl(var(--foreground));
+  }
+  
+  .text-medium-contrast {
+    color: hsl(var(--muted-foreground));
   }
 }
